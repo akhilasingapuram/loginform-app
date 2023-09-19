@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import Loginform from "./Loginform";
 
-function App() {
+const App = () => {
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = (username, password) => {
+    if (username === "user" && password === "pass") {
+      setLoggedIn(true);
+    } else {
+      alert("Invalid credentials");
+    }
+  };
+  const handleLogout = () => {
+    setLoggedIn(false);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      {loggedIn ? (
+        <div>
+          <p>Welcome! You have logged in</p>
+          <button onClick={handleLogout}>Logout</button>
+        </div>
+      ) : (
+        <Loginform handleLogin={handleLogin} />
+      )}
     </div>
   );
-}
-
+};
 export default App;
